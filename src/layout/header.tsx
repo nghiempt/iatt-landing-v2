@@ -6,6 +6,7 @@ import { ChevronDown, Dot, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { IMAGES } from '@/utils/image';
+import { ROUTES } from '@/utils/route';
 
 export default function Header() {
   return (
@@ -66,7 +67,7 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
+            <Link href={`${ROUTES.ABOUT}`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
               VỀ CHÚNG TÔI <ChevronDown size={16} />
             </Link>
           </li>
