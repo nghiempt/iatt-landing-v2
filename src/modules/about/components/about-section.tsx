@@ -101,7 +101,7 @@ const AboutSection = () => {
         </div>
     );
     const privacyContent = (
-        <div className="space-y-6 text-gray-600">
+        <div className="space-y-4 text-gray-600">
             <p className="mb-4">
                 Khi truy cập website INANHTHUCTUYEN.COM, quý khách đồng ý và chấp nhận thực hiện những mô tả trong Chính sách bảo mật thông tin. Nếu quý khách không đồng ý với các điều khoản của Chính sách này, vui lòng không sử dụng website của chúng tôi. Chính sách này được đưa ra nhằm bảo vệ quyền lợi của quý khách khi sử dụng dịch vụ và mua hàng.
             </p>
@@ -164,7 +164,7 @@ const AboutSection = () => {
         </div>
     );
     const shippingContent = (
-        <div className="space-y-6 text-gray-600">
+        <div className="space-y-4 text-gray-600">
             <p className="mb-4">
                 Sau khi khách hàng đặt hàng trên trang web INANHTRUCTUYEN.COM, hệ thống sẽ tự động gửi thông báo xác nhận đã đặt hàng. Đội ngũ hỗ trợ của chúng tôi sẽ liên hệ với Quý khách qua số điện thoại mà Quý khách đã cung cấp để xác minh thông tin đơn hàng, thông báo chi phí vận chuyển, thời gian giao hàng dự kiến và các thông tin cần thiết khác.
                 Chúng tôi hỗ trợ giao hàng tận nơi trên toàn quốc
@@ -187,9 +187,9 @@ const AboutSection = () => {
     );
 
     const returnContent = (
-        <div className="space-y-6 text-gray-600">
+        <div className="space-y-4 text-gray-600">
           <div className="space-y-2">
-            <h3 className="text-lg font-medium text-gray-800">Lý do chấp nhận đổi trả:</h3>
+            <h3 className="text-lg font-bold text-gray-800">Lý do chấp nhận đổi trả:</h3>
             <ul className="list-disc pl-6 ">
               <li>Sản phẩm giao sai về số lượng, thông tin hoặc mẫu mã.</li>
               <li>Sản phẩm bị hỏng do lỗi sản xuất hoặc trong quá trình vận chuyển.</li>
@@ -197,7 +197,7 @@ const AboutSection = () => {
           </div>
     
           <div className="space-y-2">
-            <h3 className="text-lg font-medium text-gray-800">Yêu cầu trả hàng:</h3>
+            <h3 className="text-lg font-bold text-gray-800">Yêu cầu trả hàng:</h3>
             <ul className="list-disc pl-6">
               <li>Sản phẩm còn đóng gói nguyên vẹn.</li>
               <li>Đầy đủ phụ kiện và quà tặng (nếu có).</li>
@@ -206,14 +206,14 @@ const AboutSection = () => {
           </div>
     
           <div className="space-y-2">
-            <h3 className="text-lg font-medium text-gray-800">Thời gian đổi trả:</h3>
+            <h3 className="text-lg font-bold text-gray-800">Thời gian đổi trả:</h3>
             <p className="pl-6">
-              <span className="text-yellow-500 font-medium">Trong vòng 24h kể từ khi nhận hàng.</span>
+              <span className="text-yellow-500 font-bold">Trong vòng 24h kể từ khi nhận hàng.</span>
             </p>
           </div>
     
           <div className="space-y-2">
-            <h3 className="text-lg font-medium text-gray-800">Chi phí đổi trả:</h3>
+            <h3 className="text-lg font-bold text-gray-800">Chi phí đổi trả:</h3>
             <ul className="list-disc pl-6 ">
               <li>Đổi lỗi của chúng tôi: Miễn phí vận chuyển hai chiều.</li>
               <li>Do nhu cầu của khách: Khách hàng thanh toán chi phí vận chuyển.</li>

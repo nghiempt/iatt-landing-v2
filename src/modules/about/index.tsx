@@ -19,9 +19,9 @@ export default function AboutClient() {
       <div className="container">
         <div className="px-4 pt-4 pb-4 lg:pb-0 lg:px-0">
           <nav className="flex items-center gap-2 text-sm text-gray-600 mb-6 ">
-            <Link href={`${ROUTES.HOME}`} className="hover:text-black text-md">Trang chủ</Link>
+            <Link href={`${ROUTES.HOME}`} className="hover:text-[rgb(var(--primary-rgb))] text-md">Trang chủ</Link>
             <ChevronRight className="w-4 h-4" />
-            <Link href={`${ROUTES.ABOUT}`} className="hover:text-black text-md">Về Chúng tôi</Link>
+            <Link href={`${ROUTES.ABOUT}`} className="hover:text-[rgb(var(--primary-rgb))] text-md">Về Chúng tôi</Link>
           </nav>
         </div>
         <AboutSection />
