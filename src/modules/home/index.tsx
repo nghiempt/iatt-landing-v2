@@ -6,6 +6,8 @@ import Image from "next/image";
 import CategoryListSection from "./components/category-list";
 import ProductSection from "./components/product";
 import CategorySpecialSection from "./components/category-special";
+import { Ban } from "lucide-react";
+import BannerSlider from "./components/slider";
 
 export default function HomeClient() {
   return (
@@ -19,14 +21,7 @@ export default function HomeClient() {
         <span className="text-sm font-light">Vui lòng đảm bảo địa chỉ giao hàng và tên thành phố được định dạng chính xác trước khi tiến hành thanh toán. Để biết thêm chi tiết, vui lòng tham khảo <span className="text-[rgb(var(--primary-rgb))]">Thêm chi tiết</span> hoặc <span className="text-[rgb(var(--primary-rgb))]">Liên hệ với chúng tôi</span>.</span>
       </div>
       <div className="container">
-        <div className="relative w-full h-96">
-          <Image
-            src="https://res.cloudinary.com/farmcode/image/upload/v1737356622/iatt/z4xbel6agaeprit6iffe.png"
-            alt="alt"
-            fill
-            className="object-cover rounded-lg"
-          />
-        </div>
+        <BannerSlider />
         <CategoryListSection />
         <ProductSection />
         <div className="relative w-full h-[600px]">

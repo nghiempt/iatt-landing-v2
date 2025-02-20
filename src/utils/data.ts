@@ -2,22 +2,22 @@ const CATEGORIES = [
   {
     id: 0,
     tag: "all",
-    name: "TẤT CẢ",
+    name: "Tất Cả",
   },
   {
     id: 1,
     tag: "Plastic",
-    name: "PLASTIC",
+    name: "In Ấn",
   },
   {
     id: 2,
     tag: "Frame",
-    name: "KHUNG ẢNH",
+    name: "Khung Ảnh",
   },
   {
     id: 3,
     tag: "Album",
-    name: "ALBUM",
+    name: "Album",
   },
 ];
 

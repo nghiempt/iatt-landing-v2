@@ -68,32 +68,38 @@ export default function Header() {
           </li>
           <li>
             <Link href={`${ROUTES.ABOUT}`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              VỀ CHÚNG TÔI <ChevronDown size={16} />
+              VỀ CHÚNG TÔI 
+              {/* <ChevronDown size={16} /> */}
+            </Link>
+          </li>
+          <li>
+            <Link href={`${ROUTES.PLASTIC}?tag=Plastic`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
+              IN ẤN 
+              {/* <ChevronDown size={16} /> */}
+            </Link>
+          </li>
+          <li>
+            <Link href={`${ROUTES.FRAME}?tag=Frame`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
+              KHUNG ẢNH 
+              {/* <ChevronDown size={16} /> */}
+            </Link>
+          </li>
+          <li>
+            <Link href={`${ROUTES.ALBUM}?tag=Album`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
+              PHOTOBOOK
+               {/* <ChevronDown size={16} /> */}
             </Link>
           </li>
           <li>
             <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              IN ẢNH <ChevronDown size={16} />
+              BẢNG GIÁ 
+              {/* <ChevronDown size={16} /> */}
             </Link>
           </li>
           <li>
             <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              KHUNG ẢNH <ChevronDown size={16} />
-            </Link>
-          </li>
-          <li>
-            <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              PHOTOBOOK <ChevronDown size={16} />
-            </Link>
-          </li>
-          <li>
-            <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              BẢNG GIÁ <ChevronDown size={16} />
-            </Link>
-          </li>
-          <li>
-            <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              TIN TỨC <ChevronDown size={16} />
+              TIN TỨC 
+              {/* <ChevronDown size={16} /> */}
             </Link>
           </li>
         </ul>

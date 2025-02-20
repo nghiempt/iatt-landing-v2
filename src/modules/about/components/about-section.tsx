@@ -79,8 +79,7 @@ const AboutSection = () => {
                                 <Image
                                     src={service.imageSrc}
                                     alt={service.title}
-                                    className="w-full h-full object-cover transition-transform durat
-                                    ion-300 hover:scale-105"
+                                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 "
                                     width={397}
                                     height={465}
                                 />
