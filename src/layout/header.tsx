@@ -1,12 +1,12 @@
 "use client";
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { ChevronDown, Dot, Search } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { IMAGES } from '@/utils/image';
-import { ROUTES } from '@/utils/route';
+import Link from "next/link";
+import Image from "next/image";
+import { Dot, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { IMAGES } from "@/utils/image";
+import { ROUTES } from "@/utils/route";
 
 export default function Header() {
   return (
@@ -62,55 +62,82 @@ export default function Header() {
       <nav className="container py-4 flex justify-between">
         <ul className="flex items-center space-x-8">
           <li>
-            <Link href="/" className="text-md font-semibold text-[rgb(var(--primary-rgb))]">
+            <Link
+              href="/"
+              className="text-md font-semibold text-[rgb(var(--primary-rgb))]"
+            >
               TRANG CHỦ
             </Link>
           </li>
           <li>
-            <Link href={`${ROUTES.ABOUT}`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              VỀ CHÚNG TÔI 
+            <Link
+              href={`${ROUTES.ABOUT}`}
+              className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]"
+            >
+              VỀ CHÚNG TÔI
               {/* <ChevronDown size={16} /> */}
             </Link>
           </li>
           <li>
-            <Link href={`${ROUTES.PLASTIC}?tag=Plastic`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              IN ẤN 
+            <Link
+              href={`${ROUTES.PLASTIC}?tag=Plastic`}
+              className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]"
+            >
+              IN ẤN
               {/* <ChevronDown size={16} /> */}
             </Link>
           </li>
           <li>
-            <Link href={`${ROUTES.FRAME}?tag=Frame`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              KHUNG ẢNH 
+            <Link
+              href={`${ROUTES.FRAME}?tag=Frame`}
+              className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]"
+            >
+              KHUNG ẢNH
               {/* <ChevronDown size={16} /> */}
             </Link>
           </li>
           <li>
-            <Link href={`${ROUTES.ALBUM}?tag=Album`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
+            <Link
+              href={`${ROUTES.ALBUM}?tag=Album`}
+              className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]"
+            >
               PHOTOBOOK
-               {/* <ChevronDown size={16} /> */}
-            </Link>
-          </li>
-          <li>
-            <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              BẢNG GIÁ 
               {/* <ChevronDown size={16} /> */}
             </Link>
           </li>
           <li>
-            <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              TIN TỨC 
+            <Link
+              href={`${ROUTES.ORDER_SINGLE}`}
+              className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]"
+            >
+              BẢNG GIÁ
+              {/* <ChevronDown size={16} /> */}
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/"
+              className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]"
+            >
+              TIN TỨC
               {/* <ChevronDown size={16} /> */}
             </Link>
           </li>
         </ul>
         <ul className="flex items-center space-x-2">
           <li className="ml-auto">
-            <Link href="/" className="text-md font-medium flex justify-center items-center text-[rgb(var(--primary-rgb))]">
+            <Link
+              href="/"
+              className="text-md font-medium flex justify-center items-center text-[rgb(var(--primary-rgb))]"
+            >
               <Dot size={36} /> Vị trí của hàng
             </Link>
           </li>
           <li>
-            <Link href="/" className="text-md font-medium flex justify-center items-center text-[rgb(var(--secondary-rgb))]">
+            <Link
+              href="/"
+              className="text-md font-medium flex justify-center items-center text-[rgb(var(--secondary-rgb))]"
+            >
               <Dot size={36} /> Yêu cầu xuất hóa đơn VAT
             </Link>
           </li>
