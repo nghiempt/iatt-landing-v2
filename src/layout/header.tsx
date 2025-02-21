@@ -97,7 +97,7 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
+            <Link href={`${ROUTES.BLOG}`}className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
               TIN TỨC 
               {/* <ChevronDown size={16} /> */}
             </Link>
