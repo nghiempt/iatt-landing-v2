@@ -7,4 +7,6 @@ export const ROUTES = {
   ALBUM: "/photobook",
   PRICE: "/bang-gia",
   BLOG: "/tin-tuc",
+  LOGIN: "/dang-nhap",
+  REGISTER: "/dang-ky",
 };

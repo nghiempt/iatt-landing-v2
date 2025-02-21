@@ -7,8 +7,19 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { IMAGES } from '@/utils/image';
 import { ROUTES } from '@/utils/route';
+import { usePathname } from 'next/navigation';
+
 
 export default function Header() {
+  const pathname = usePathname();
+
+  const checkTabEnable = (tab: string, pathname: any) => {
+    if (pathname === tab) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   return (
     <header className="hidden lg:flex flex-col w-full bg-white shadow-md">
       <div className="container py-4">
@@ -46,7 +57,9 @@ export default function Header() {
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <Button variant="ghost">Đăng nhập</Button>
+              <Link href={`${ROUTES.LOGIN}`}>
+                <Button variant="ghost">Đăng nhập</Button>
+              </Link>
               <span className="text-gray-300">|</span>
               <Button variant="ghost">Đăng ký</Button>
             </div>
@@ -59,63 +72,90 @@ export default function Header() {
           </div>
         </div>
       </div>
+    {(pathname === '/dang-nhap' || pathname === '/dang-ky') ? null : (
       <nav className="container py-4 flex justify-between">
-        <ul className="flex items-center space-x-8">
-          <li>
-            <Link href="/" className="text-md font-semibold text-[rgb(var(--primary-rgb))]">
-              TRANG CHỦ
-            </Link>
-          </li>
-          <li>
-            <Link href={`${ROUTES.ABOUT}`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              VỀ CHÚNG TÔI 
-              {/* <ChevronDown size={16} /> */}
-            </Link>
-          </li>
-          <li>
-            <Link href={`${ROUTES.PLASTIC}?tag=Plastic`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              IN ẤN 
-              {/* <ChevronDown size={16} /> */}
-            </Link>
-          </li>
-          <li>
-            <Link href={`${ROUTES.FRAME}?tag=Frame`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              KHUNG ẢNH 
-              {/* <ChevronDown size={16} /> */}
-            </Link>
-          </li>
-          <li>
-            <Link href={`${ROUTES.ALBUM}?tag=Album`} className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              PHOTOBOOK
-               {/* <ChevronDown size={16} /> */}
-            </Link>
-          </li>
-          <li>
-            <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              BẢNG GIÁ 
-              {/* <ChevronDown size={16} /> */}
-            </Link>
-          </li>
-          <li>
-            <Link href={`${ROUTES.BLOG}`}className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
-              TIN TỨC 
-              {/* <ChevronDown size={16} /> */}
-            </Link>
-          </li>
-        </ul>
-        <ul className="flex items-center space-x-2">
-          <li className="ml-auto">
-            <Link href="/" className="text-md font-medium flex justify-center items-center text-[rgb(var(--primary-rgb))]">
-              <Dot size={36} /> Vị trí của hàng
-            </Link>
-          </li>
-          <li>
-            <Link href="/" className="text-md font-medium flex justify-center items-center text-[rgb(var(--secondary-rgb))]">
-              <Dot size={36} /> Yêu cầu xuất hóa đơn VAT
-            </Link>
-          </li>
-        </ul>
-      </nav>
+      <ul className="flex items-center space-x-8">
+        <li>
+          <Link href="/" className={`${
+            checkTabEnable('/', pathname) 
+            ? "text-[rgb(var(--primary-rgb))] font-semibold" 
+            : "text-black" 
+            } text-md font-medium hover:text-[rgb(var(--primary-rgb))]`}>
+            TRANG CHỦ
+          </Link>
+        </li>
+        <li>
+          <Link href={`${ROUTES.ABOUT}`} className={`${
+            checkTabEnable(ROUTES.ABOUT, pathname) 
+            ? "text-[rgb(var(--primary-rgb))] font-semibold" 
+            : "text-black" 
+            } text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}>
+            VỀ CHÚNG TÔI
+            {/* <ChevronDown size={16} /> */}
+          </Link>
+        </li>
+        <li>
+          <Link href={`${ROUTES.PLASTIC}?tag=Plastic`} className={`${
+            checkTabEnable(ROUTES.PLASTIC, pathname) 
+            ? "text-[rgb(var(--primary-rgb))] font-semibold" 
+            : "text-black" 
+            }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}>
+            IN ẤN
+            {/* <ChevronDown size={16} /> */}
+          </Link>
+        </li>
+        <li>
+          <Link href={`${ROUTES.FRAME}?tag=Frame`} className={`${
+            checkTabEnable(ROUTES.FRAME, pathname) 
+            ? "text-[rgb(var(--primary-rgb))] font-semibold" 
+            : "text-black" 
+            }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}>
+            KHUNG ẢNH
+            {/* <ChevronDown size={16} /> */}
+          </Link>
+        </li>
+        <li>
+          <Link href={`${ROUTES.ALBUM}?tag=Album`} className={`${
+            checkTabEnable(ROUTES.ALBUM, pathname) 
+            ? "text-[rgb(var(--primary-rgb))] font-semibold" 
+            : "text-black" 
+            }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}>
+            PHOTOBOOK
+            {/* <ChevronDown size={16} /> */}
+          </Link>
+        </li>
+        <li>
+          <Link href="/" className="text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]">
+            BẢNG GIÁ
+            {/* <ChevronDown size={16} /> */}
+          </Link>
+        </li>
+        <li>
+          <Link href={`${ROUTES.BLOG}`} className={`${
+            checkTabEnable(ROUTES.BLOG, pathname) 
+            ? "text-[rgb(var(--primary-rgb))] font-semibold" 
+            : "text-black" 
+            }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}>
+            TIN TỨC
+            {/* <ChevronDown size={16} /> */}
+          </Link>
+        </li>
+      </ul>
+      <ul className="flex items-center space-x-2">
+        <li className="ml-auto">
+          <Link href="/" className="text-md font-medium flex justify-center items-center text-[rgb(var(--primary-rgb))]">
+            <Dot size={36} /> Vị trí của hàng
+          </Link>
+        </li>
+        <li>
+          <Link href="/" className="text-md font-medium flex justify-center items-center text-[rgb(var(--secondary-rgb))]">
+            <Dot size={36} /> Yêu cầu xuất hóa đơn VAT
+          </Link>
+        </li>
+      </ul>
+    </nav>
+    )}
+      
     </header>
   );
 }

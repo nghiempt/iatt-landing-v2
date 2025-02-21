@@ -58,6 +58,9 @@ export default function BlogClient() {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
+      <div className="w-full bg-black p-2.5 text-center text-white text-sm font-semibold">
+        <span>IN ẢNH TRỰC TUYẾN - In ảnh nhanh chóng, tiện lợi</span>
+      </div>
       <Header />
       <div className="container pb-6 pt-2">
         <div className="px-4 pt-4 pb-10 lg:px-0">
