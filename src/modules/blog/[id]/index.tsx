@@ -57,15 +57,15 @@ export default function BlogDetailClient() {
       <div className="container pb-6 pt-2">
         <div className="w-full px-4 py-4 lg:px-0 flex flex-col justify-center items-start">
           <nav className="flex items-center gap-2 text-sm text-gray-600 mb-4">
-            <Link href={`${ROUTES.HOME}`} className="hover:text-black text-md">
+            <Link href={`${ROUTES.HOME}`} className="hover:text-[rgb(var(--primary-rgb))] text-md">
               Trang chủ
             </Link>
             <ChevronRight className="w-4 h-4" />
-            <Link href={`${ROUTES.BLOG}`} className="hover:text-black text-md">
+            <Link href={`${ROUTES.BLOG}`} className="hover:text-[rgb(var(--primary-rgb))] text-md">
               Tin Tức
             </Link>
             <ChevronRight className="w-4 h-4" />
-            <p className="hover:text-black truncate text-md">
+            <p className="hover:text-[rgb(var(--primary-rgb))] text-md truncate text-md">
               {currentData?.title?.slice(0, 20)}...
             </p>
           </nav>

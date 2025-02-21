@@ -1,11 +1,72 @@
 "use client";
 
+import { toast } from "@/hooks/use-toast";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
+import { AccountService } from "@/services/account";
+import { API } from "@/utils/api";
+import { ROUTES } from "@/utils/route";
 import Image from "next/image";
+import { useState } from "react";
+import Cookies from "js-cookie";
 
 
 export default function LoginClient() {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [logined, setLogined] = useState(false);
+
+  const handleSubmitWithGoogle = async (e: any) => {
+    e.preventDefault();
+    window.location.href = API.AUTH.LOGIN_WITH_GOOGLE;
+  };
+
+  const validateForm = () => {
+    if (username === "" || password === "") {
+      toast({
+        variant: "destructive",
+        title: "Vui lòng điền đầy đủ thông tin",
+      });
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+    setIsLoading(true);
+
+    try {
+      let data;
+
+      if (/^\d+$/.test(username)) {
+        data = await AccountService.loginAccountPhone(username, password);
+      } else {
+        data = await AccountService.loginAccountEmail(username, password);
+      }
+
+      if (data?.message === "SUCCESS") {
+        Cookies.set("isLogin", data?.data, { expires: 7 });
+        Cookies.set("userLogin", data?.data, { expires: 7 });
+        setLogined(true);
+        window.location.href = ROUTES.HOME;
+      } else {
+        throw new Error("Email hoặc mật khẩu chưa chính xác");
+      }
+    } catch (error) {
+      console.error("========= Error Login:", error);
+      toast({
+        variant: "destructive",
+        title: "Email hoặc mật khẩu chưa chính xác",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <div className="w-full bg-black p-2.5 text-center text-white text-sm font-semibold">
@@ -21,7 +82,7 @@ export default function LoginClient() {
           <div className="space-y-4">
             {/* Social Login Buttons */}
             <div className="flex justify-between items-center gap-4">
-              <button className="w-full flex items-center justify-center gap-3 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+              <button onClick={(e: any) => handleSubmitWithGoogle(e)} className="w-full flex items-center justify-center gap-3 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                 <Image
                   className="w-5 h-5"
                   src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -60,16 +121,22 @@ export default function LoginClient() {
             <form className="space-y-4">
               <div>
                 <input
-                  type="text"
-                  placeholder="Nhập tài khoản"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Nhập SĐT hoặc Email"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
               <div>
                 <input
                   type="password"
-                  placeholder="Nhập mật khẩu"
+                  name="password"
+                  id="password"
+                  placeholder="••••••••"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className="flex justify-end">
@@ -79,6 +146,7 @@ export default function LoginClient() {
               </div>
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className="w-full py-2 px-4 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-md transition-colors"
               >
                 Đăng nhập

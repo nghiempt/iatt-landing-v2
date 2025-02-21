@@ -9,4 +9,5 @@ export const ROUTES = {
   BLOG: "/tin-tuc",
   LOGIN: "/dang-nhap",
   REGISTER: "/dang-ky",
+  ACCOUNT: "/tai-khoan",
 };
