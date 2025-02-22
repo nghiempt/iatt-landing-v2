@@ -70,8 +70,8 @@ export default function AccountClient() {
         return <AccountProfile />;
       case "history":
         return <OrderHistory />;
-      case "order-single":
-        return <OrderSingleCreate user={accountProfile} />;
+      // case "order-single":
+      //   return <OrderSingleCreate user={accountProfile} />;
       case "order-album":
         return <OrderAlbumCreate />;
       case "address":
