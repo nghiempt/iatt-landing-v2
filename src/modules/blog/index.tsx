@@ -63,7 +63,7 @@ export default function BlogClient() {
       </div>
       <Header />
       <div className="container pb-6 pt-2">
-        <div className="px-4 pt-4 pb-10 lg:px-0">
+        <div className="px-4 py-4 pb-10 lg:px-0">
           <nav className="flex items-center gap-2 text-sm text-gray-600 mb-6">
             <Link href={`${ROUTES.HOME}`} className="hover:text-[rgb(var(--primary-rgb))] text-md">
               Trang chủ

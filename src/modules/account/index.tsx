@@ -9,6 +9,10 @@ import OrderAlbumCreate from "./components/order-album";
 import OrderSingleCreate from "./components/order-single";
 import Cookies from "js-cookie";
 import { AccountService } from "@/services/account";
+import AccountAddress from "./components/address";
+import AccountPassword from "./components/password";
+
+
 
 export interface Province {
   code: string;
@@ -70,6 +74,10 @@ export default function AccountClient() {
         return <OrderSingleCreate user={accountProfile} />;
       case "order-album":
         return <OrderAlbumCreate />;
+      case "address":
+        return <AccountAddress />;
+      case "password":
+        return <AccountPassword />;
       default:
         return <Loading />;
     }

@@ -16,6 +16,7 @@ import Sidebar from "./sidebar";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
 export interface Province {
@@ -80,16 +81,15 @@ export interface CustomerAccount {
   wardName: string;
 }
 
-export default function AccountProfile() {
-  const emailCookie = Cookies.get("isLogin");
+export default function AccountAddress() {
   const isLogin = Cookies.get("isLogin");
+
+  const [provinces, setProvinces] = React.useState<Province[]>([]);
+  const [districts, setDistricts] = React.useState<District[]>([]);
+  const [wards, setWards] = React.useState<Ward[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [customerAccount, setCustomerAccount] =
     useState<CustomerAccount | null>(null);
-  const router = useRouter();
-  const tab = new URLSearchParams(window.location.search).get("tab");
-
-  const [provinces, setProvinces] = React.useState<Province[]>([]);
   const [formData, setFormData] = React.useState<FormData>({
     name: customerAccount?.name || "",
     email: customerAccount?.email || "",
@@ -154,6 +154,44 @@ export default function AccountProfile() {
     fetchAccount();
   }, []);
 
+  const handleProvinceChange = (provinceCode: string) => {
+    const selectedProvince = provinces.find((p) => p.code === provinceCode);
+    if (selectedProvince) {
+      setDistricts(selectedProvince.districts);
+      setWards([]);
+      setFormData((prev) => ({
+        ...prev,
+        province: provinceCode,
+        district: "",
+        ward: "",
+      }));
+    } else {
+      setDistricts([]);
+      setWards([]);
+    }
+  };
+
+  const handleDistrictChange = (districtCode: string) => {
+    const selectedDistrict = districts.find((d) => d.code === districtCode);
+    if (selectedDistrict) {
+      setWards(selectedDistrict.wards || []);
+      setFormData((prev) => ({
+        ...prev,
+        district: districtCode,
+        ward: "",
+      }));
+    } else {
+      setWards([]);
+    }
+  };
+
+  const handleWardChange = (wardCode: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      ward: wardCode,
+    }));
+  };
+
   const getFullAddressName = () => {
     if (!customerAccount || !customerAccount.province)
       return "Bạn chưa có địa chỉ giao hàng vui lòng bổ sung.";
@@ -176,8 +214,18 @@ export default function AccountProfile() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    const selectedProvince = provinces.find(
+      (p) => p.code === formData.province
+    );
+    const selectedDistrict = districts.find(
+      (d) => d.code === formData.district
+    );
+    const selectedWard = wards.find((w) => w.code === formData.ward);
     const formattedData = {
       ...formData,
+      provinceName: selectedProvince?.name,
+      districtName: selectedDistrict?.name,
+      wardName: selectedWard?.name,
     };
     const response = await AccountService.updateAccount(
       customerAccount?._id,
@@ -221,51 +269,82 @@ export default function AccountProfile() {
             {/* Main Content */}
             <div className="flex-1 p-8 col-span-8">
               <div className="max-w-2xl">
-                <h1 className="text-2xl font-medium mb-6">Hồ sơ cá nhân</h1>
+                <h1 className="text-2xl font-medium mb-6">Địa chỉ</h1>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="name" className="text-gray-600">Họ và tên:</Label>
-                    <div className="w-full">
-                      <Input
-                        id="name"
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className="w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                      />
-                    </div>
+                    <Label htmlFor="province" className="text-gray-600">Tỉnh/Thành phố:</Label>
+                    <Select
+                      value={formData.province}
+                      onValueChange={handleProvinceChange}
+                      disabled={loading}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Chọn tỉnh/thành phố" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {provinces.map((province) => (
+                          <SelectItem key={province.code} value={province.code}>
+                            {province.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
                   </div>
 
                   <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="phone" className="text-gray-600">Số điện thoại:</Label>
-                    <div className=" w-full">
-                      <Input
-                        type="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className="w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                      />
-                    </div>
+                    <Label htmlFor="district" className="text-gray-600">Quận/Huyện:</Label>
+                    <Select
+                      value={formData.district}
+                      onValueChange={handleDistrictChange}
+                      disabled={!formData.province || loading}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Chọn quận/huyện" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {districts.map((district) => (
+                          <SelectItem key={district.code} value={district.code}>
+                            {district.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="email" className="text-gray-600">Email:</Label>
-                    <div className="w-full">
-                      <Input
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        disabled={true}
-                        className="w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                      />
-                    </div>
+                    <Label htmlFor="ward" className="text-gray-600">Phường/Xã:</Label>
+                    <Select
+                      value={formData.ward}
+                      onValueChange={handleWardChange}
+                      disabled={!formData.district || loading}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Chọn phường/xã" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {wards.map((ward) => (
+                          <SelectItem key={ward.code} value={ward.code}>
+                            {ward.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
+                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
+                    <Label htmlFor="address" className="text-gray-600">Số nhà, tên đường:</Label>
+                    <Input
+                      id="address"
+                      name="address"
+                      placeholder="Ví dụ: 123 Đường ABC"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  
                   <div className="mt-8 flex justify-center items-center">
                     <Button
                       type="submit"

@@ -59,6 +59,7 @@ export default function Header() {
   const isLogin = Cookies.get("isLogin");
   const [customerAccount, setCustomerAccount] =
     useState<CustomerAccount | null>(null);
+
   const checkTabEnable = (tab: string, pathname: any) => {
     if (pathname === tab) {
       return true;
@@ -145,7 +146,7 @@ export default function Header() {
                 </div>
                 <Link
                   href="#"
-                  className="hidden lg:flex bg-[rgb(var(--primary-rgb))] items-center rounded-full px-6 py-2.5 cursor-pointer"
+                  className="hidden lg:flex bg-[rgb(var(--primary-rgb))] hover:bg-[rgb(var(--secondary-rgb))] items-center rounded-full px-6 py-2.5 cursor-pointer"
                 >
                   <Download size={18} className="mr-3" color="white" />
                   <p className="text-white text-md font-semibold ">Tải App</p>
