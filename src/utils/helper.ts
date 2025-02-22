@@ -49,6 +49,23 @@ const renderCategory2 = (category: string) => {
   return result;
 };
 
+const calculateTotal = (money: string, ship: any, voucher: any) => {
+  const number = Number(money);
+  if (ship || voucher) {
+    const discount = Number(voucher);
+    const money = Number(ship);
+    const result = number + money - discount;
+    return result.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+  }
+  if (isNaN(number)) {
+    return "Invalid number";
+  }
+  return number.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
+};
+
 export const HELPER = {
   formatVND,
   formatDate,
@@ -56,4 +73,5 @@ export const HELPER = {
   convertSpacesToDash,
   upPrice,
   renderCategory2,
+  calculateTotal,
 };
