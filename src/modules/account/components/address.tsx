@@ -137,7 +137,6 @@ export default function AccountAddress() {
         if (selectedDistrict) {
           setWards(selectedDistrict.wards);
 
-          
         }
           
       }
