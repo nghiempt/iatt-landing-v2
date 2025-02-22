@@ -86,10 +86,6 @@ export default function AccountProfile() {
   const [loading, setLoading] = React.useState(false);
   const [customerAccount, setCustomerAccount] =
     useState<CustomerAccount | null>(null);
-  const router = useRouter();
-  const tab = new URLSearchParams(window.location.search).get("tab");
-
-  const [provinces, setProvinces] = React.useState<Province[]>([]);
   const [formData, setFormData] = React.useState<FormData>({
     name: customerAccount?.name || "",
     email: customerAccount?.email || "",
@@ -101,21 +97,6 @@ export default function AccountProfile() {
     province: customerAccount?.province || "",
   });
 
-
-  React.useEffect(() => {
-    const fetchProvinces = async () => {
-      try {
-        const response = await fetch(
-          "https://provinces.open-api.vn/api/?depth=3"
-        );
-        const data = await response.json();
-        setProvinces(data);
-      } catch (error) {
-        console.error("Error fetching provinces:", error);
-      }
-    };
-    fetchProvinces();
-  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -153,23 +134,6 @@ export default function AccountProfile() {
 
     fetchAccount();
   }, []);
-
-  const getFullAddressName = () => {
-    if (!customerAccount || !customerAccount.province)
-      return "Bạn chưa có địa chỉ giao hàng vui lòng bổ sung.";
-
-    const provinceObj = provinces.find(
-      (p) => p.code.toString() === customerAccount.province
-    );
-    const districtObj = provinceObj?.districts.find(
-      (d) => d.code.toString() === customerAccount.district
-    );
-    const wardObj = districtObj?.wards.find(
-      (w) => w.code.toString() === customerAccount.ward
-    );
-
-    return `${customerAccount.address}, ${wardObj?.name}, ${districtObj?.name}, ${provinceObj?.name}`;
-  };
 
 
 

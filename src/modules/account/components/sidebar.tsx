@@ -104,7 +104,10 @@ export default function Sidebar({ customerAccount }: SidebarProps) {
       </div>
 
       <nav className="space-y-2">
-        <a href={`${ROUTES.ACCOUNT}?tab=profile`} className="flex items-center space-x-3 px-4 py-2 bg-gray-100 text-[rgb(var(--primary-rgb))] hover:bg-gray-50 rounded-lg">
+        <a href={`${ROUTES.ACCOUNT}?tab=profile`} className={`${((tab === "profile") || (tab === "address") || (tab === "password")) 
+          ? "text-[rgb(var(--primary-rgb))] font-semibold bg-gray-100" 
+          : "text-gray-600"
+          } flex items-center space-x-3 px-4 py-2 hover:bg-gray-50 rounded-lg `}>
           <User className="w-5 h-5" />
           <span>Thông tin tài khoản</span>
         </a>
@@ -130,7 +133,10 @@ export default function Sidebar({ customerAccount }: SidebarProps) {
           <Bell className="w-5 h-5" />
           <span>Thông báo</span>
         </a>
-        <a href="#" className="flex items-center space-x-3 px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg">
+        <a href={`${ROUTES.ACCOUNT}?tab=history`} className={`${"history" === tab
+          ? "text-[rgb(var(--primary-rgb))] font-semibold bg-gray-100" 
+          : "text-gray-600" 
+          } flex items-center space-x-3 px-4 py-2 hover:bg-gray-50 rounded-lg`}>
           <Clock className="w-5 h-5" />
           <span>Lịch sử mua hàng</span>
         </a>
