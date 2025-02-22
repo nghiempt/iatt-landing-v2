@@ -20,7 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input";
 
 export interface Province {
-  code: string;
+  code: number;
   codename: string;
   districts: District[];
   division_type: string;
@@ -29,7 +29,7 @@ export interface Province {
 }
 
 export interface District {
-  code: string;
+  code: number;
   codename: string;
   division_type: string;
   name: string;
@@ -38,7 +38,7 @@ export interface District {
 }
 
 export interface Ward {
-  code: string;
+  code: number;
   codename: string;
   division_type: string;
   name: string;
@@ -51,15 +51,12 @@ export interface UserData {
   email: string;
   phone: string;
   address: string;
-  ward?: string;
-  district?: string;
-  province?: string;
 }
 
 export interface FormData extends UserData {
-  ward: string;
-  district: string;
-  province: string;
+  ward: number;
+  district: number;
+  province: number;
 }
 
 export interface CustomerAccount {
@@ -91,14 +88,14 @@ export default function AccountAddress() {
   const [customerAccount, setCustomerAccount] =
     useState<CustomerAccount | null>(null);
   const [formData, setFormData] = React.useState<FormData>({
-    name: customerAccount?.name || "",
-    email: customerAccount?.email || "",
-    avatar: customerAccount?.avatar || "",
-    phone: customerAccount?.phone || "",
-    address: customerAccount?.address || "",
-    ward: customerAccount?.ward || "",
-    district: customerAccount?.district || "",
-    province: customerAccount?.province || "",
+    name:  "",
+    email:  "",
+    avatar:  "",
+    phone:  "",
+    address:  "",
+    ward:  0,
+    district:  0,
+    province:  0,
   });
 
 
@@ -125,11 +122,33 @@ export default function AccountAddress() {
     }));
   };
 
+
+  React.useEffect(() => {
+    if (formData.province) {
+      const selectedProvince = provinces.find(
+        (p) => p.code === formData.province
+      );
+      if (selectedProvince) {
+        setDistricts(selectedProvince.districts);
+
+        const selectedDistrict = selectedProvince.districts.find(
+          (d) => d.code === formData.district
+        );
+        if (selectedDistrict) {
+          setWards(selectedDistrict.wards);
+
+          
+        }
+          
+      }
+    }
+  }, [formData.province, formData.district, provinces]);
+
   useEffect(() => {
     // if (emailCookie) {
     //   init(emailCookie);
     // }
-
+    
     const fetchAccount = async () => {
       if (isLogin) {
         try {
@@ -155,15 +174,16 @@ export default function AccountAddress() {
   }, []);
 
   const handleProvinceChange = (provinceCode: string) => {
-    const selectedProvince = provinces.find((p) => p.code === provinceCode);
+    const selectedProvince = provinces.find((p) => p.code === Number(provinceCode));
     if (selectedProvince) {
+      console.log("selectedProvince: ", selectedProvince.districts);
       setDistricts(selectedProvince.districts);
       setWards([]);
       setFormData((prev) => ({
         ...prev,
-        province: provinceCode,
-        district: "",
-        ward: "",
+        province: Number(provinceCode),
+        district: 0,
+        ward: 0,
       }));
     } else {
       setDistricts([]);
@@ -171,24 +191,25 @@ export default function AccountAddress() {
     }
   };
 
-  const handleDistrictChange = (districtCode: string) => {
-    const selectedDistrict = districts.find((d) => d.code === districtCode);
+    const handleDistrictChange = (districtCode: string) => {
+    const selectedDistrict = districts.find((d) => d.code === Number(districtCode));
     if (selectedDistrict) {
+      console.log("selectedDistrict: ", selectedDistrict.wards);
       setWards(selectedDistrict.wards || []);
       setFormData((prev) => ({
         ...prev,
-        district: districtCode,
-        ward: "",
+        district: Number(districtCode),
+        ward: 0,
       }));
     } else {
       setWards([]);
     }
   };
 
-  const handleWardChange = (wardCode: string) => {
+  const handleWardChange = (wardCode: String) => {
     setFormData((prev) => ({
       ...prev,
-      ward: wardCode,
+      ward: Number(wardCode),
     }));
   };
 
@@ -275,7 +296,7 @@ export default function AccountAddress() {
                   <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
                     <Label htmlFor="province" className="text-gray-600">Tỉnh/Thành phố:</Label>
                     <Select
-                      value={formData.province}
+                      value={String(formData.province)}
                       onValueChange={handleProvinceChange}
                       disabled={loading}
                     >
@@ -284,7 +305,7 @@ export default function AccountAddress() {
                       </SelectTrigger>
                       <SelectContent>
                         {provinces.map((province) => (
-                          <SelectItem key={province.code} value={province.code}>
+                          <SelectItem key={province.code} value={String(province.code)}>
                             {province.name}
                           </SelectItem>
                         ))}
@@ -296,7 +317,7 @@ export default function AccountAddress() {
                   <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
                     <Label htmlFor="district" className="text-gray-600">Quận/Huyện:</Label>
                     <Select
-                      value={formData.district}
+                      value={String(formData.district)}
                       onValueChange={handleDistrictChange}
                       disabled={!formData.province || loading}
                     >
@@ -305,7 +326,7 @@ export default function AccountAddress() {
                       </SelectTrigger>
                       <SelectContent>
                         {districts.map((district) => (
-                          <SelectItem key={district.code} value={district.code}>
+                          <SelectItem key={district.code} value={String(district.code)}>
                             {district.name}
                           </SelectItem>
                         ))}
@@ -316,7 +337,7 @@ export default function AccountAddress() {
                   <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
                     <Label htmlFor="ward" className="text-gray-600">Phường/Xã:</Label>
                     <Select
-                      value={formData.ward}
+                      value={String(formData.ward)}
                       onValueChange={handleWardChange}
                       disabled={!formData.district || loading}
                     >
@@ -325,7 +346,7 @@ export default function AccountAddress() {
                       </SelectTrigger>
                       <SelectContent>
                         {wards.map((ward) => (
-                          <SelectItem key={ward.code} value={ward.code}>
+                          <SelectItem key={ward.code} value={String(ward.code)}>
                             {ward.name}
                           </SelectItem>
                         ))}
