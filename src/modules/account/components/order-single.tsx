@@ -5,7 +5,7 @@ import Header from "@/layout/header";
 import { ROUTES } from "@/utils/route";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import CreateOrderSingleSection from "./CreateOrderSingleSection";
+import CreateOrderSingleSection from "./create-order-single-section";
 
 export default function CreateOrderSingle() {
   return (

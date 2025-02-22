@@ -16,6 +16,9 @@ import { HELPER } from "@/utils/helper";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { toast } from "@/hooks/use-toast";
+import { OrderService } from "@/services/order";
+import { UploadService } from "@/services/upload";
 
 interface ColorOption {
     id: string;
@@ -93,10 +96,11 @@ export interface CustomerAccount {
 }
 
 const CreateOrderSingleSection = () => {
+    const [selectedPayment, setSelectedPayment] = React.useState<string>("cash");
     const [provinces, setProvinces] = React.useState<Province[]>([]);
     const [districts, setDistricts] = React.useState<District[]>([]);
     const [wards, setWards] = React.useState<Ward[]>([]);
-    const [loading, setLoading] = React.useState(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const param = useSearchParams();
     const [frameSize, setFrameSize] = useState("20x30");
     const [frameColor, setFrameColor] = useState("red");
@@ -203,6 +207,182 @@ const CreateOrderSingleSection = () => {
         const res = await ProductService.getAll();
         if (res && res.data.length > 0) {
             setProducts(res.data);
+        }
+    };
+
+    const validateForm = () => {
+        if (selectedProduct === "Chon san pham") {
+            toast({
+                title: "",
+                description: "Vui lòng chọn một sản phẩm!",
+                variant: "destructive",
+            });
+            return false;
+        }
+        // if (!emailCookie) {
+        //   toast({
+        //     title: "",
+        //     description: "Vui lòng đăng nhập để tiếp tục!",
+        // variant: "destructive",
+        //   });
+        //   return false;
+        // }
+        if (!uploadedFile) {
+            toast({
+                title: "",
+                description: "Vui lòng tải lên một hình ảnh!",
+                variant: "destructive",
+            });
+            return false;
+        }
+        if (!selectedColor) {
+            toast({
+                title: "",
+                description: "Vui lòng chọn màu sắc!",
+                variant: "destructive",
+            });
+            return false;
+        }
+        if (!selectedSize) {
+            toast({
+                title: "",
+                description: "Vui lòng chọn kích thước!",
+                variant: "destructive",
+            });
+            return false;
+        }
+        if (!customerAccount?.address) {
+            toast({
+                title: "",
+                description: "Vui lòng nhập địa chỉ giao hàng!",
+                variant: "destructive",
+            });
+            return false;
+        }
+        if (!customerAccount?.ward) {
+            toast({
+                title: "",
+                description:
+                    "Vui lòng chọn đầy đủ Tỉnh/Thành phố, Quận/Huyện, Phường/Xã.",
+                variant: "destructive",
+            });
+            return false;
+        }
+        if (!customerAccount?.phone) {
+            toast({
+                title: "",
+                description: "Vui lòng nhập số điện thoại!",
+                variant: "destructive",
+            });
+            return false;
+        }
+        const phoneRegex = /^\d{10,11}$/;
+        if (!phoneRegex.test(customerAccount.phone)) {
+            toast({
+                title: "",
+                description:
+                    "Số điện thoại phải là một dãy số hợp lệ (10 đến 11 chữ số)! ",
+                variant: "destructive",
+            });
+            return false;
+        }
+        if (!selectedPayment) {
+            toast({
+                title: "",
+                description: "Vui lòng chọn phương thức thanh toán!",
+                variant: "destructive",
+            });
+            return false;
+        }
+        return true;
+    };
+
+    const handleSubmit = async () => {
+        if (!validateForm()) return;
+
+        setLoading(true);
+        try {
+            const upload: any = await UploadService.uploadToCloudinary([
+                uploadedFile,
+            ]);
+
+            const selectedProvince = provinces.find(
+                (p) => p.code === formData.province
+            );
+            const selectedDistrict = districts.find(
+                (d) => d.code === formData.district
+            );
+            const selectedWard = wards.find((w) => w.code === formData.ward);
+
+            const commonAccountData = {
+                name: formData?.name || "",
+                phone: formData?.phone || "",
+                // avatar: formData?.avatar || "",
+                address: formData?.address || "",
+                role: "personal",
+                ward: selectedWard?.code,
+                district: selectedDistrict?.code,
+                province: selectedProvince?.code,
+                status: true,
+                districtName: selectedDistrict?.name,
+                provinceName: selectedProvince?.name,
+                wardName: selectedWard?.name,
+            };
+
+            const orderData = {
+                product_id: selectedProduct,
+                image: upload[0]?.secure_url,
+                color: selectedColor,
+                size: selectedSize,
+                address: formData?.address || "",
+                payment_method: selectedPayment || "",
+                total: products.find(
+                    (pro: any) => pro._id.toString() === selectedProduct
+                )?.price,
+            };
+
+            let response;
+
+            if (!isLogin) {
+                response = await OrderService.createOrder_no_login({
+                    account: commonAccountData,
+                    order: orderData,
+                });
+            } else {
+                response = await OrderService.createOrder({
+                    account: { _id: isLogin, ...commonAccountData },
+                    order: orderData,
+                });
+
+                if (response === false) {
+                    toast({
+                        title: "",
+                        description: "Số điện thoại đã được sử dụng!",
+                        variant: "destructive",
+                    });
+                    return;
+                }
+            }
+
+            if (selectedPayment === "momo" && response?.data) {
+                window.open(response.data, "_blank");
+                window.location.href = isLogin
+                    ? `${ROUTES.ACCOUNT}?tab=history`
+                    : `${ROUTES.HOME}`;
+            } else {
+                window.location.href = isLogin
+                    ? `${ROUTES.ACCOUNT}?tab=history`
+                    : `${ROUTES.HOME}`;
+            }
+        } catch (error) {
+            console.error("Error submitting order:", error);
+            toast({
+                title: "",
+                description: "Đã xảy ra lỗi khi đặt hàng, vui lòng thử lại!",
+                variant: "destructive",
+            });
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -321,6 +501,7 @@ const CreateOrderSingleSection = () => {
 
     return (
         <div className="w-full mx-auto py-8">
+
             <div className="flex flex-col md:flex-row gap-8">
                 <div className="w-full md:w-1/2 space-y-6">
                     <div>
@@ -442,7 +623,7 @@ const CreateOrderSingleSection = () => {
                             <div>
                                 <h2 className="text-xl font-medium mb-4">Tùy chọn thanh toán</h2>
                                 <div className="border border-gray-300 rounded divide-y ml-5">
-                                    <div className="p-4 flex items-center">
+                                    <div onClick={() => setSelectedPayment("cash")} className=" cursor-pointer p-4 flex items-center">
                                         <input
                                             type="radio"
                                             id="cod"
@@ -454,18 +635,36 @@ const CreateOrderSingleSection = () => {
                                             Thanh toán khi nhận hàng
                                         </label>
                                     </div>
-                                    <div className="p-4 flex items-center">
-                                        <input
-                                            type="radio"
-                                            id="bank"
-                                            name="payment"
-                                            className="mr-2 w-4 h-4"
-                                        />
-                                        <label htmlFor="bank" className="ml-2">
-                                            Thanh toán qua chuyển khoản ngân hàng
-                                        </label>
+                                    <div onClick={() => setSelectedPayment("bank")} className=" cursor-pointer p-4 items-center">
+                                        <div className="flex items-center">
+                                            <input
+                                                type="radio"
+                                                id="bank"
+                                                name="payment"
+                                                className="mr-2 w-4 h-4"
+                                            />
+                                            <label htmlFor="bank" className="ml-2">
+                                                Thanh toán qua chuyển khoản ngân hàng
+                                            </label>
+                                        </div>
+
+                                        {selectedPayment === "bank" && (
+                                            <div className="w-full flex flex-row justify-center items-center gap-4 mt-4">
+                                                <Image
+                                                    src="https://docs.lightburnsoftware.com/legacy/img/QRCode/ExampleCode.png"
+                                                    alt="QR code"
+                                                    width={100}
+                                                    height={100}
+                                                />
+                                                <div className="flex flex-col gap-1">
+                                                    <strong>NGUYEN VAN A</strong>
+                                                    <span>ABC BANK</span>
+                                                    <span>11223344556677</span>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-                                    <div className="p-4 flex items-center">
+                                    <div onClick={() => setSelectedPayment("momo")} className=" cursor-pointer p-4 flex items-center">
                                         <input
                                             type="radio"
                                             id="momo"
@@ -496,7 +695,7 @@ const CreateOrderSingleSection = () => {
                                 </h2>
                                 <textarea
                                     placeholder="Ghi chú về đơn hàng (Nếu có)"
-                                    className="w-full p-3 border border-gray-300 rounded h-24 ml-5"
+                                    className="w-full p-3 border border-gray-300 rounded h-24 ml-5 mx-10"
                                 ></textarea>
                             </div>
                         </>
@@ -528,7 +727,7 @@ const CreateOrderSingleSection = () => {
                             Quay lại Giỏ hàng
                         </Link>
 
-                        <button className="w-1/2 py-4 bg-yellow-400 hover:bg-yellow-500 text-center rounded-md font-medium transition">
+                        <button onClick={() => handleSubmit()} className="w-1/2 py-4 bg-yellow-400 hover:bg-yellow-500 text-center rounded-md font-medium transition">
                             Đặt hàng
                         </button>
                     </div>

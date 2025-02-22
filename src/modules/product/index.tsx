@@ -134,7 +134,7 @@ export default function ProductClient() {
         <span>IN ẢNH TRỰC TUYẾN - In ảnh nhanh chóng, tiện lợi</span>
       </div>
       <Header />
-      <div className="container pb-6 pt-2">
+      <div className="container pb-20 pt-2">
           <div className="px-4 py-4 lg:px-0">
             <nav className="flex items-center gap-2 text-sm text-gray-600 mb-6">
               <Link href={`${ROUTES.HOME}`} className="hover:text-[rgb(var(--primary-rgb))] text-md">
@@ -194,7 +194,7 @@ export default function ProductClient() {
                         selectedSort === sort ? (
                           <div
                             key={sort}
-                            className="bg-gray-200 font-medium flex items-center px-4"
+                            className="bg-gray-200 text-[rgb(var(--primary-rgb))] font-medium flex items-center px-4 py-1"
                           >
                             <span>{label}</span>
                           </div>
@@ -202,7 +202,7 @@ export default function ProductClient() {
                           <button
                             key={sort}
                             onClick={() => handleSelectSort(sort)}
-                            className="text-black font-medium w-full text-left px-4"
+                            className="text-black font-medium w-full text-left px-4 py-1"
                           >
                             {label}
                           </button>

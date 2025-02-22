@@ -8,43 +8,29 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
+import { GlobalComponent } from '@/components/global'
+import { ROUTES } from '@/utils/route'
+import { HELPER } from '@/utils/helper'
+import { useEffect, useState } from 'react'
+import { ProductService } from '@/services/product'
 
-const products = [
-    {
-        id: 1,
-        title: 'KHUNG ẢNH NGHỆ THUẬT',
-        originalPrice: '100.000₫',
-        salePrice: '230.000₫',
-        image: 'https://res.cloudinary.com/farmcode/image/upload/v1728994544/iatt/IMG_7600_ibpjrp.jpg',
-        status: 'Còn hàng'
-    },
-    {
-        id: 2,
-        title: 'ÉP ẢNH CHẤT LƯỢNG CAO',
-        originalPrice: '100.000₫',
-        salePrice: '60.000₫',
-        image: 'https://res.cloudinary.com/farmcode/image/upload/v1728991377/iatt/IMG_7644_mi2bkg.jpg',
-        status: 'Còn hàng'
-    },
-    {
-        id: 3,
-        title: 'ALBUM ẢNH CƯỚI',
-        originalPrice: '100.000₫',
-        salePrice: '160.000₫',
-        image: 'https://res.cloudinary.com/farmcode/image/upload/v1726833331/iatt/syrnjtt21rknyuavlvbi.png',
-        status: 'Hết hàng'
-    },
-    {
-        id: 4,
-        title: 'ALBUM CÁN MÀNG SẮC NÉT',
-        originalPrice: '100.000₫',
-        salePrice: '190.000₫',
-        image: 'https://res.cloudinary.com/farmcode/image/upload/v1728996961/iatt/IMG_7665_iolfrr.jpg',
-        status: 'Còn hàng'
-    }
-]
+interface ProductSectionProps {
+    type: string;
+  }
 
-const ProductSection = () => {
+
+const ProductSection: React.FC<ProductSectionProps> = ({type}) => {
+    const [products, setProducts] = useState([] as any);
+    const init = async () => {
+        const res = await ProductService.getAll();
+        if (res && res.data.length > 0) {
+            const frameProducts = res.data.filter((product: { category: string }) => product.category === type);
+            setProducts(frameProducts);
+        }
+    };
+    useEffect(() => {
+        init()
+    }, []);
     return (
         <section className="container !px-0 py-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -57,12 +43,16 @@ const ProductSection = () => {
                     />
                     <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
                         <h3 className="text-lg font-medium mb-2">Bộ sưu tập</h3>
-                        <h2 className="text-4xl font-bold mb-4">IN ẤN</h2>
+                        <h2 className="text-4xl font-bold mb-4">
+                            {type === 'Frame' && 'KHUNG ẢNH'}
+                            {type === 'Album' && 'PHOTOBOOK'}
+                            {type === 'Plastic' && 'IN ẤN'}
+                        </h2>
                         <Link
                             href="/"
                             className="text-md hover:underline"
                         >
-                            Xem thêm 
+                            Xem thêm
                         </Link>
                     </div>
                 </div>
@@ -75,42 +65,19 @@ const ProductSection = () => {
                         className="w-full"
                     >
                         <CarouselContent>
-                            {products.map((product) => (
+                            {products.map((product: any) => (
                                 <CarouselItem key={product.id} className="md:basis-1/2 lg:basis-1/3">
-                                    <Card className="border-none">
-                                        <CardContent className="p-0">
-                                            <div className="relative aspect-square rounded-lg overflow-hidden mb-4">
-                                                <Image
-                                                    src={product.image}
-                                                    alt={product.title}
-                                                    fill
-                                                    className="object-cover"
-                                                />
-                                                {product.id === 3 && (
-                                                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                                        <span className="text-white text-lg font-medium">Liên hệ với chúng tôi</span>
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <div className="space-y-2">
-                                                <div className="text-sm text-gray-500 line-through">
-                                                    {product.originalPrice}
-                                                </div>
-                                                <div className="text-xl font-bold">
-                                                    {product.salePrice}
-                                                </div>
-                                                <h3 className="font-medium">
-                                                    {product.title}
-                                                </h3>
-                                                <div className={`text-sm ${product.status === 'Còn hàng'
-                                                    ? 'text-green-500'
-                                                    : 'text-red-500'
-                                                    }`}>
-                                                    {product.status}
-                                                </div>
-                                            </div>
-                                        </CardContent>
-                                    </Card>
+                                    <Link
+                                        href={`${ROUTES.PRODUCT}/${HELPER.getLastFourChars(
+                                            product?._id
+                                        )}?sp=${HELPER.convertSpacesToDash(product?.name)}`}
+                                    >
+                                        <GlobalComponent.ProductCardSmall
+                                            image={product?.thumbnail}
+                                            title={product?.name}
+                                            price={product?.price}
+                                        />
+                                    </Link>
                                 </CarouselItem>
                             ))}
                         </CarouselContent>

@@ -62,7 +62,7 @@ export default function BlogClient() {
         <span>IN ẢNH TRỰC TUYẾN - In ảnh nhanh chóng, tiện lợi</span>
       </div>
       <Header />
-      <div className="container pb-6 pt-2">
+      <div className="container pb-20 pt-2">
         <div className="px-4 py-4 pb-10 lg:px-0">
           <nav className="flex items-center gap-2 text-sm text-gray-600 mb-6">
             <Link href={`${ROUTES.HOME}`} className="hover:text-[rgb(var(--primary-rgb))] text-md">
@@ -80,8 +80,8 @@ export default function BlogClient() {
             BÀI VIẾT MỚI NHẤT
           </h1>
 
-          <Card onClick={() => window.location.href = `${ROUTES.BLOG}/${HELPER.getLastFourChars(featuredPost?._id)}?b=${HELPER.convertSpacesToDash(featuredPost?.title)}`} className="cursor-pointer overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 bg-white rounded-lg overflow-hidden shadow-sm">
+          <Card onClick={() => window.location.href = `${ROUTES.BLOG}/${HELPER.getLastFourChars(featuredPost?._id)}?b=${HELPER.convertSpacesToDash(featuredPost?.title)}`} className="cursor-pointer overflow-hidden mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white rounded-lg overflow-hidden shadow-sm">
               <div className="relative h-64 md:h-auto">
                 <Image
                   src={featuredPost?.thumbnail}

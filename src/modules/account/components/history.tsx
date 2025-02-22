@@ -135,7 +135,14 @@ export default function OrderHistory() {
             <Sidebar customerAccount={customerAccount} />
             <div className=" space-y-4 col-span-8">
               <h1 className="text-2xl font-semibold mb-6">Đơn hàng của bạn</h1>
-              {orders.map(async (order: any, index: any) => (
+              {orders.length === 0 ? (
+                  <div className="col-span-2 text-center w-full flex justify-center items-center py-4">
+                    <p className="text-gray-500 text-lg">
+                      Bạn chưa có đơn hàng nào.
+                    </p>
+                  </div>
+                ) :(
+              orders.map(async (order: any, index: any) => (
                 <div key={index} className="border border-gray-300 p-4">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex justify-between items-center gap-16">
@@ -210,10 +217,10 @@ export default function OrderHistory() {
                     </div>
                   </div>
                 </div>
-              ))}
+              )))}
             </div>
           </div>
-        )}
+        )}  
       </div>
       <Footer />
     </div>

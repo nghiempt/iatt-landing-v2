@@ -54,7 +54,7 @@ export default function BlogDetailClient() {
         <span>IN ẢNH TRỰC TUYẾN - In ảnh nhanh chóng, tiện lợi</span>
       </div>
       <Header />
-      <div className="container pb-6 pt-2">
+      <div className="container pb-20 pt-2">
         <div className="w-full px-4 py-4 lg:px-0 flex flex-col justify-center items-start">
           <nav className="flex items-center gap-2 text-sm text-gray-600 mb-4">
             <Link href={`${ROUTES.HOME}`} className="hover:text-[rgb(var(--primary-rgb))] text-md">
@@ -81,13 +81,13 @@ export default function BlogDetailClient() {
                 {currentData?.title}
               </h1>
 
-              <div className="w-full lg:w-1/2 h-full bg-pink-50 rounded-md mb-4">
+              <div className="w-full  h-full bg-pink-50 rounded-md mb-4">
                 <Image
                   src={currentData?.thumbnail || ""}
                   alt="Products Banner"
-                  className="object-cover rounded-md"
+                  className=" object-cover rounded-md"
                   width={1000}
-                  height={200}
+                  height={500}
                 />
               </div>
               <div className="w-full mt-4 pt-3 z-10">
@@ -117,7 +117,7 @@ export default function BlogDetailClient() {
                           blogs?._id
                         )}?b=${HELPER.convertSpacesToDash(blogs?.title)}`}
                       >
-                        <div className="grid grid-cols-12  gap-6">
+                        <div className="grid grid-cols-12 gap-6">
                           <div className="col-span-4">
                             <Image
                               className="h-28 object-cover rounded-lg"
@@ -128,7 +128,7 @@ export default function BlogDetailClient() {
                             />
                           </div>
                           <div className="flex flex-col justify-between col-span-8">
-                            <div className="my-2">
+                            <div className="">
                               <p className="font-bold text-[15px] leading-5 line-clamp-2">
                                 {blogs?.title}
                               </p>

@@ -292,8 +292,8 @@ export default function AccountAddress() {
                 <h1 className="text-2xl font-medium mb-6">Địa chỉ</h1>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="province" className="text-gray-600">Tỉnh/Thành phố:</Label>
+                  <div className="flex justify-between items-center gap-4">
+                    <Label htmlFor="province" className="text-gray-600 w-2/6" >Tỉnh/Thành phố:</Label>
                     <Select
                       value={String(formData.province)}
                       onValueChange={handleProvinceChange}
@@ -313,8 +313,8 @@ export default function AccountAddress() {
 
                   </div>
 
-                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="district" className="text-gray-600">Quận/Huyện:</Label>
+                  <div className="flex justify-between items-center gap-4">
+                    <Label htmlFor="district" className="text-gray-600 w-2/6">Quận/Huyện:</Label>
                     <Select
                       value={String(formData.district)}
                       onValueChange={handleDistrictChange}
@@ -333,8 +333,8 @@ export default function AccountAddress() {
                     </Select>
                   </div>
 
-                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="ward" className="text-gray-600">Phường/Xã:</Label>
+                  <div className="flex justify-between items-center gap-4">
+                    <Label htmlFor="ward" className="text-gray-600 w-2/6">Phường/Xã:</Label>
                     <Select
                       value={String(formData.ward)}
                       onValueChange={handleWardChange}
@@ -353,8 +353,8 @@ export default function AccountAddress() {
                     </Select>
                   </div>
 
-                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="address" className="text-gray-600">Số nhà, tên đường:</Label>
+                  <div className="flex justify-between items-center gap-4 ">
+                    <Label htmlFor="address" className="text-gray-600 w-2/6">Số nhà, tên đường:</Label>
                     <Input
                       id="address"
                       name="address"

@@ -73,7 +73,7 @@ export default function LoginClient() {
         <span>IN ẢNH TRỰC TUYẾN - In ảnh nhanh chóng, tiện lợi</span>
       </div>
       <Header />
-      <div className="container flex items-center justify-center p-4">
+      <div className="container flex items-center justify-center py-16 ">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-medium text-gray-900">Đăng nhập với</h2>
@@ -94,7 +94,7 @@ export default function LoginClient() {
                 <span className="text-gray-700">Google</span>
               </button>
 
-              <button className="w-full flex items-center justify-center gap-3 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+              {/* <button className="w-full flex items-center justify-center gap-3 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                 <Image
                   src="https://s3-alpha-sig.figma.com/img/e639/9094/af2115f2fefe8b0ee78b87cb1d047faf?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=L09K4ct3QucB0H4mvLdiuhN91RWTtdG4MAyPbvtlkX-4G0WbSCvRffz8pHalOPKKTq7BuyuVYnciXJsO~o~EX1M8PDIm0YqdJ2ireJXoH81eG7F-iRLf1ySz-oSpTZwXkYNpd7zkVjCoKb2e-x1nTzDaWaCRKHLS7OzWWSIUhjd0Gc9jLCOzZwZ8Q9XuKj~YRobCokYnDLctmeSKZ2V62NpG98uY6mwn1QB-JFg8bBtp1WIn62YzCtyebuCwN~z7gYREgrX2T1D8AwO-ZfxNnqqaEdWc56gEkDKtJadZDkVlieP5dxj77j2L8AR8JWkC2GJ43AjnUgn7GANpYDpyRQ__"
                   alt="Facebook"
@@ -103,7 +103,7 @@ export default function LoginClient() {
                   height={200}
                 />
                 <span className="text-gray-700">Facebook</span>
-              </button>
+              </button> */}
             </div>
 
 

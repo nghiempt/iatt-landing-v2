@@ -183,13 +183,13 @@ export default function AccountProfile() {
             <Sidebar customerAccount={customerAccount} />
 
             {/* Main Content */}
-            <div className="flex-1 p-8 col-span-8">
+            <div className="flex-1 py-8 px-8 col-span-8">
               <div className="max-w-2xl">
                 <h1 className="text-2xl font-medium mb-6">Hồ sơ cá nhân</h1>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="name" className="text-gray-600">Họ và tên:</Label>
+                  <div className="flex justify-between items-center gap-4">
+                    <Label htmlFor="name" className="text-gray-600 w-2/6 ">Họ và tên:</Label>
                     <div className="w-full">
                       <Input
                         id="name"
@@ -197,14 +197,13 @@ export default function AccountProfile() {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        className="w-full py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                       />
                     </div>
-
                   </div>
 
-                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="phone" className="text-gray-600">Số điện thoại:</Label>
+                  <div className="flex justify-between items-center gap-4">
+                    <Label htmlFor="phone" className="text-gray-600 w-2/6">Số điện thoại:</Label>
                     <div className=" w-full">
                       <Input
                         type="phone"
@@ -216,8 +215,8 @@ export default function AccountProfile() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="email" className="text-gray-600">Email:</Label>
+                  <div className="flex justify-between items-center gap-4">
+                    <Label htmlFor="email" className="text-gray-600 w-2/6">Email:</Label>
                     <div className="w-full">
                       <Input
                         id="email"

@@ -23,7 +23,7 @@ export default function HomeClient() {
       <div className="container">
         <BannerSlider />
         <CategoryListSection />
-        <ProductSection />
+        <ProductSection type="Frame" />
         <div className="relative w-full h-[600px]">
           <Image
             src="https://res.cloudinary.com/farmcode/image/upload/v1737355887/iatt/vw0razvbguqvcumvyfxa.png"
@@ -32,7 +32,7 @@ export default function HomeClient() {
             className="object-cover rounded-lg"
           />
         </div>
-        <ProductSection />
+        <ProductSection type="Album"/>
         <CategorySpecialSection />
         <div className="relative w-full h-96 mt-8 rounded-lg">
           <Image
@@ -42,13 +42,13 @@ export default function HomeClient() {
             className="object-cover rounded-lg"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/40 to-transparent rounded-lg">
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+            <div className="absolute bottom-[30%] left-0 right-0 p-6 text-white">
               <h3 className="text-2xl font-bold mb-2 text-black">IN ẢNH TRỰC TUYẾN</h3>
-              <p className="text-sm mb-2 text-black">Biến khoảnh khắc yêu thích của bạn thành những bức ảnh đẹp lung linh! Chỉ cần tải ảnh lên, chọn kích thước, chất liệu và đặt hàng trong vài phút.</p>
+              <p className="text-sm mb-2 text-black w-[50%]">Biến khoảnh khắc yêu thích của bạn thành những bức ảnh đẹp lung linh! Chỉ cần tải ảnh lên, chọn kích thước, chất liệu và đặt hàng trong vài phút.</p>
             </div>
           </div>
         </div>
-        <ProductSection />
+        <ProductSection type="Plastic"/>
         <div className="relative w-full grid grid-cols-2 gap-4 pb-8">
           <Image
             src="https://res.cloudinary.com/farmcode/image/upload/v1737356705/iatt/ryuyf5j3kg5d02hlm1lc.png"

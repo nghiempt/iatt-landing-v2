@@ -5,7 +5,7 @@ import Header from "@/layout/header";
 import Footer from "@/layout/footer";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { ChevronRight, ChevronDown, ChevronLeft, Loader } from "lucide-react";
+import { ChevronRight, ChevronDown, ChevronLeft, Loader, ChevronUp } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import "swiper/css";
@@ -161,7 +161,7 @@ export default function ProductDetailClient() {
         <span>IN ẢNH TRỰC TUYẾN - In ảnh nhanh chóng, tiện lợi</span>
       </div>
       <Header />
-      <div className="container py-6">
+      <div className="container pb-20 pt-2">
         {isLoading ? (
           <div className="col-span-2 text-center w-full flex justify-center items-center py-40">
             <Loader className="animate-spin" size={32} />
@@ -299,19 +299,19 @@ export default function ProductDetailClient() {
                         <span>Số lượng</span>
                         <div className="flex border border-gray-400 rounded-sm">
                           <button
-                            className="px-3 py-1 border-r border-gray-400"
+                            className="px-3 py-1 border-r border-gray-400 items-center"
                             onClick={() => handleQuantityChange('decrease')}
                           >
                             -
                           </button>
                           <input
                             type="number"
-                            className="w-16 text-center items-center"
+                            className="w-14 grid place-items-center ml-2"
                             value={quantity}
                             readOnly
                           />
                           <button
-                            className="px-3 py-1 border-l border-gray-400"
+                            className="px-3 py-1 border-l border-gray-400 items-center"
                             onClick={() => handleQuantityChange('increase')}
                           >
                             +
@@ -320,14 +320,14 @@ export default function ProductDetailClient() {
                       </div>
 
                       <div className="flex space-x-4">
-                        <button className="px-6 py-2 border-2 border-[rgb(var(--primary-rgb))] text-[rgb(var(--primary-rgb))] hover:bg-orange-50">
+                        <button className="px-6 py-2 w-52 border-2 border-[rgb(var(--primary-rgb))] text-[rgb(var(--primary-rgb))] hover:bg-orange-50">
                           Thêm Vào Giỏ Hàng
                         </button>
                         <button
                           onClick={() => {
                             window.location.href = `/tai-khoan?tab=order-single&product=${currentData?._id}`;
                           }}
-                          className="px-6 py-2 bg-[rgb(var(--primary-rgb))] text-white hover:bg-[rgb(var(--primary-rgb))]">
+                          className="px-6 py-2 w-52 bg-[rgb(var(--primary-rgb))] text-white hover:bg-[rgb(var(--primary-rgb))]">
                           Mua Ngay
                         </button>
                       </div>
@@ -352,8 +352,8 @@ export default function ProductDetailClient() {
                             className="text-black cursor-pointer font-semibold py-4 px-8 border border-gray-300 flex items-center gap-4 rounded-md"
                             onClick={() => setExpanded(!expanded)}
                           >
-                            {expanded ? "Thu gọn" : "Xem thêm"}
-                            <ChevronDown size={16} />
+                            {expanded ? <><p>Thu gọn</p> <ChevronUp size={16} /></> :<><p>Xem thêm</p> <ChevronDown size={16} /></> }
+                            
                           </button>
                         </div>
                         <div className="pt-4 mt-4 border-t border-gray-200">
@@ -420,8 +420,7 @@ export default function ProductDetailClient() {
                       className="text-black cursor-pointer font-semibold py-4 px-8 border border-gray-300 flex items-center gap-4 rounded-md"
                       onClick={() => setExpanded1(!expanded1)}
                     >
-                      {expanded1 ? "Thu gọn" : "Xem thêm"}
-                      <ChevronDown size={16} /> 
+                      {expanded ? <><p>Thu gọn</p> <ChevronUp size={16} /></> :<><p>Xem thêm</p> <ChevronDown size={16} /></> }
                     </button>
                   </div>
                 </div>

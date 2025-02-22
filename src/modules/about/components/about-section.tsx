@@ -241,7 +241,7 @@ const AboutSection = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white py-4">
+        <div className="min-h-screen bg-white">
             {/* Hero Banner */}
             <BannerSlider />
 

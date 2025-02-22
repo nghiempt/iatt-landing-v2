@@ -151,6 +151,7 @@ export default function Header() {
                   <Download size={18} className="mr-3" color="white" />
                   <p className="text-white text-md font-semibold ">Tải App</p>
                 </Link>
+                
                 <div className="hidden lg:flex mr-4">
                   <Dropdown>
                     <DropdownTrigger>
@@ -161,7 +162,9 @@ export default function Header() {
                         height={1000}
                         className="w-11 h-11 object-cover rounded-full cursor-pointer"
                       />
+                      
                     </DropdownTrigger>
+                    
                     <DropdownMenu
                       className="bg-white rounded-md border border-gray-200"
                       aria-label="Static Actions"
@@ -212,7 +215,14 @@ export default function Header() {
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
+                  
                 </div>
+                <Image
+              src={IMAGES.CART}
+              alt="In Ảnh Trực Tuyến"
+              width={32}
+              height={32}
+            />
               </>
             ) : (
               <>
@@ -223,15 +233,24 @@ export default function Header() {
                   <span className="text-gray-300">|</span>
                   <Button variant="ghost">Đăng ký</Button>
                 </div>
-              </>
-            )}
-
-            <Image
+                <Image
               src={IMAGES.CART}
               alt="In Ảnh Trực Tuyến"
               width={32}
               height={32}
             />
+              <div>
+              <Link
+                  href="#"
+                  className="hidden lg:flex bg-[rgb(var(--primary-rgb))] hover:bg-[rgb(var(--secondary-rgb))] items-center rounded-full px-6 py-2.5 cursor-pointer"
+                >
+                  <Download size={18} className="mr-3" color="white" />
+                  <p className="text-white text-md font-semibold ">Tải App</p>
+                </Link>
+              </div>
+              </>
+            )}
+
           </div>
         </div>
       </div>

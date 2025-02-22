@@ -210,8 +210,8 @@ export default function AccountPassword() {
                 <h1 className="text-2xl font-medium mb-6">Đổi Mật khẩu</h1>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="password" className="text-gray-600">Nhập mật khẩu cũ:</Label>
+                  <div className="flex justify-between items-center gap-4">
+                    <Label htmlFor="password" className="text-gray-600 w-2/6">Nhập mật khẩu cũ:</Label>
                     <div className="w-full">
                       <Input
                         id="password"
@@ -225,8 +225,8 @@ export default function AccountPassword() {
 
                   </div>
 
-                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="newPassword" className="text-gray-600">Nhập mật khẩu mới:</Label>
+                  <div className="flex justify-between items-center gap-4">
+                    <Label htmlFor="newPassword" className="text-gray-600 w-2/6">Nhập mật khẩu mới:</Label>
                     <div className=" w-full">
                       <Input
                         type="newPassword"
@@ -238,8 +238,8 @@ export default function AccountPassword() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-[120px,1fr,80px] items-center gap-4">
-                    <Label htmlFor="confirmPassword" className="text-gray-600">Nhập lại mật khẩu mới:</Label>
+                  <div className="flex justify-between items-center gap-4">
+                    <Label htmlFor="confirmPassword" className="text-gray-600 w-2/6">Nhập lại mật khẩu mới:</Label>
                     <div className="w-full">
                       <Input
                         id="confirmPassword"
