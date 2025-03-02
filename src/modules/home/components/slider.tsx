@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
 interface Banner {
@@ -14,28 +13,22 @@ interface Banner {
 const bannerData: Banner[] = [
     {
         id: 1,
-        imageUrl: 'https://res.cloudinary.com/farmcode/image/upload/v1737610165/iatt/tpncp39xket7idqaob6l.png',
+        imageUrl: 'https://res.cloudinary.com/farmcode/image/upload/v1740925209/iatt/fhwyaaj9z4vxbtps6lqm.png',
         title: 'Banner 1',
         description: 'Description for banner 1'
     },
     {
         id: 2,
-        imageUrl: 'https://res.cloudinary.com/farmcode/image/upload/v1737610175/iatt/u05vnm3fa9fdoyfgjgtb.png',
+        imageUrl: 'https://res.cloudinary.com/farmcode/image/upload/v1740925245/iatt/tq0p7ekzpcmlkm3g6ccq.png',
         title: 'Banner 2',
         description: 'Description for banner 2'
     },
     {
         id: 3,
-        imageUrl: 'https://res.cloudinary.com/farmcode/image/upload/v1737610179/iatt/vru8xah5zjhwhjcgp1ry.png',
+        imageUrl: 'https://res.cloudinary.com/farmcode/image/upload/v1740925247/iatt/v1oppb5zu49bu5wvi9ob.png',
         title: 'Banner 3',
         description: 'Description for banner 3'
     },
-    {
-        id: 3,
-        imageUrl: 'https://res.cloudinary.com/farmcode/image/upload/v1737610190/iatt/f8ei0emwgqf6ykguk20f.png',
-        title: 'Banner 3',
-        description: 'Description for banner 3'
-    }
 ];
 
 const BannerSlider: React.FC = () => {
@@ -62,7 +55,7 @@ const BannerSlider: React.FC = () => {
     };
 
     return (
-        <div className="relative w-full h-[250px] lg:h-[450px] ">
+        <div className="relative w-full h-[600px] lg:h-[450px]">
             <div className="relative w-full">
                 {banners.map((banner, index) => (
                     <div
@@ -73,9 +66,9 @@ const BannerSlider: React.FC = () => {
                         <Image
                             src={banner.imageUrl}
                             alt={banner.title}
-                            className="w-full object-cover rounded-lg"
+                            className="w-full h-[600px] object-cover"
                             width={1350}
-                            height={250}
+                            height={600}
                         />
                     </div>
                 ))}

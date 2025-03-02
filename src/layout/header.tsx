@@ -15,6 +15,7 @@ import {
   Loader,
   LogOut,
   NotepadText,
+  Phone,
   PhoneCall,
   Search,
   UserRound,
@@ -98,46 +99,46 @@ export default function Header() {
   };
   return (
     <header className="relative flex flex-col w-full bg-white shadow-md">
-      <div className="container py-4 px-2 lg:px-8">
+      <div className="container pt-4 pb-2 lg:py-4 px-4 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="lg:hidden flex flex-col justify-center">
             <button
               className="text-gray-800 w-10 h-10 relative focus:outline-none"
               onClick={() => setOpen(!open)}
             >
-              <div className="block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <span
-                  aria-hidden="true"
-                  className={`block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out ${
-                    open ? "rotate-45 translate-y-0" : "-translate-y-1.5"
-                  }`}
-                ></span>
-                <span
-                  aria-hidden="true"
-                  className={`block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out ${
-                    open ? "opacity-0" : "opacity-100"
-                  }`}
-                ></span>
-                <span
-                  aria-hidden="true"
-                  className={`block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out ${
-                    open ? "-rotate-45 translate-y-0" : "translate-y-1.5"
-                  }`}
-                ></span>
-              </div>
+              <Image
+                src={"https://cdn-icons-png.flaticon.com/128/1828/1828859.png"}
+                alt="alt"
+                width={24}
+                height={24}
+              />
             </button>
           </div>
           <Link href="/" className="flex items-center space-x-2">
             <Image
               src={IMAGES.LOGO}
               alt="In Ảnh Trực Tuyến"
-              width={40}
-              height={40}
+              width={44}
+              height={44}
             />
-            <span className="text-xl font-bold">IN ẢNH TRỰC TUYẾN</span>
+            <div className="flex flex-col justify-center items-start">
+              <span className="text-lg font-bold">IN ẢNH TRỰC TUYẾN</span>
+              <span className="text-xs font-light text-[#f6842c]">In ảnh đẹp giá rể</span>
+            </div>
           </Link>
-          <div className="flex lg:hidden">
-            <UserRound size={18} />
+          <div className="flex lg:hidden gap-6">
+            <Image
+              src="https://cdn-icons-png.flaticon.com/128/555/555515.png"
+              alt="alt"
+              width={24}
+              height={24}
+            />
+            <Image
+              src={"https://cdn-icons-png.flaticon.com/128/16470/16470836.png"}
+              alt="alt"
+              width={24}
+              height={24}
+            />
           </div>
           <div className="hidden lg:flex-1 max-w-xl mx-8">
             <div className="relative">
@@ -180,7 +181,6 @@ export default function Header() {
                   <Download size={18} className="mr-3" color="white" />
                   <p className="text-white text-md font-semibold ">Tải App</p>
                 </Link>
-
                 <div className="hidden lg:flex mr-4">
                   <Dropdown>
                     <DropdownTrigger>
@@ -280,17 +280,57 @@ export default function Header() {
           </div>
         </div>
       </div>
+      <div className="flex lg:hidden flex-row justify-between pt-2.5 pb-4 px-4">
+        <div className="flex flex-col justify-center items-start gap-1">
+          <span className="text-xs flex justify-start items-center gap-2">
+            <Image
+              src="https://cdn-icons-png.flaticon.com/128/724/724664.png"
+              alt="alt"
+              width={12}
+              height={12}
+            />
+            0939.xxx.xxx
+          </span>
+          <span className="text-xs flex justify-start items-center gap-2">
+            <Image
+              src="https://cdn-icons-png.flaticon.com/128/2784/2784459.png"
+              alt="alt"
+              width={12}
+              height={12}
+            />
+            Thứ 2 - Thứ 7 (Từ 8h - 17h30)
+          </span>
+        </div>
+        <div className="flex justify-center items-center border border-blue-500 rounded-md gap-2 p-1">
+          <div className="flex gap-2">
+            <Image
+              src="https://static.wikia.nocookie.net/logos/images/9/98/Google_Play_%28Favicon%29.png/revision/latest/scale-to-width-down/512?cb=20240508121626&path-prefix=vi"
+              alt="alt"
+              width={24}
+              height={24}
+            />
+            <Image
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/App_Store_%28iOS%29.svg/1024px-App_Store_%28iOS%29.svg.png"
+              alt="alt"
+              width={24}
+              height={24}
+            />
+          </div>
+          <div className="text-blue-500 font-semibold">
+            Tải app
+          </div>
+        </div>
+      </div>
       {pathname === "/dang-nhap" || pathname === "/dang-ky" ? null : (
         <nav className="hidden lg:flex container py-4 justify-between">
           <ul className="flex items-center space-x-8">
             <li>
               <Link
                 href="/"
-                className={`${
-                  checkTabEnable("/", pathname)
-                    ? "text-[rgb(var(--primary-rgb))] font-semibold"
-                    : "text-black"
-                } text-md font-medium hover:text-[rgb(var(--primary-rgb))]`}
+                className={`${checkTabEnable("/", pathname)
+                  ? "text-[rgb(var(--primary-rgb))] font-semibold"
+                  : "text-black"
+                  } text-md font-medium hover:text-[rgb(var(--primary-rgb))]`}
               >
                 TRANG CHỦ
               </Link>
@@ -298,11 +338,10 @@ export default function Header() {
             <li>
               <Link
                 href={`${ROUTES.ABOUT}`}
-                className={`${
-                  checkTabEnable(ROUTES.ABOUT, pathname)
-                    ? "text-[rgb(var(--primary-rgb))] font-semibold"
-                    : "text-black"
-                } text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}
+                className={`${checkTabEnable(ROUTES.ABOUT, pathname)
+                  ? "text-[rgb(var(--primary-rgb))] font-semibold"
+                  : "text-black"
+                  } text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}
               >
                 VỀ CHÚNG TÔI
                 {/* <ChevronDown size={16} /> */}
@@ -311,11 +350,10 @@ export default function Header() {
             <li>
               <Link
                 href={`${ROUTES.PLASTIC}?tag=Plastic`}
-                className={`${
-                  checkTabEnable(ROUTES.PLASTIC, pathname)
-                    ? "text-[rgb(var(--primary-rgb))] font-semibold"
-                    : "text-black"
-                }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}
+                className={`${checkTabEnable(ROUTES.PLASTIC, pathname)
+                  ? "text-[rgb(var(--primary-rgb))] font-semibold"
+                  : "text-black"
+                  }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}
               >
                 IN ẤN
                 {/* <ChevronDown size={16} /> */}
@@ -324,11 +362,10 @@ export default function Header() {
             <li>
               <Link
                 href={`${ROUTES.FRAME}?tag=Frame`}
-                className={`${
-                  checkTabEnable(ROUTES.FRAME, pathname)
-                    ? "text-[rgb(var(--primary-rgb))] font-semibold"
-                    : "text-black"
-                }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}
+                className={`${checkTabEnable(ROUTES.FRAME, pathname)
+                  ? "text-[rgb(var(--primary-rgb))] font-semibold"
+                  : "text-black"
+                  }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}
               >
                 KHUNG ẢNH
                 {/* <ChevronDown size={16} /> */}
@@ -337,11 +374,10 @@ export default function Header() {
             <li>
               <Link
                 href={`${ROUTES.ALBUM}?tag=Album`}
-                className={`${
-                  checkTabEnable(ROUTES.ALBUM, pathname)
-                    ? "text-[rgb(var(--primary-rgb))] font-semibold"
-                    : "text-black"
-                }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}
+                className={`${checkTabEnable(ROUTES.ALBUM, pathname)
+                  ? "text-[rgb(var(--primary-rgb))] font-semibold"
+                  : "text-black"
+                  }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}
               >
                 PHOTOBOOK
                 {/* <ChevronDown size={16} /> */}
@@ -359,11 +395,10 @@ export default function Header() {
             <li>
               <Link
                 href={`${ROUTES.BLOG}`}
-                className={`${
-                  checkTabEnable(ROUTES.BLOG, pathname)
-                    ? "text-[rgb(var(--primary-rgb))] font-semibold"
-                    : "text-black"
-                }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}
+                className={`${checkTabEnable(ROUTES.BLOG, pathname)
+                  ? "text-[rgb(var(--primary-rgb))] font-semibold"
+                  : "text-black"
+                  }text-md font-medium flex justify-center items-center gap-1 hover:text-[rgb(var(--primary-rgb))]`}
               >
                 TIN TỨC
                 {/* <ChevronDown size={16} /> */}

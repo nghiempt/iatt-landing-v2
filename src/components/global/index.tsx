@@ -50,11 +50,6 @@ const ProductCard = (
   }: any) => (
   <Card className="bg-white h-full rounded-lg overflow-hidden">
     <div className="relative">
-      {/* {hot && (
-        <div className="absolute top-2 left-2 bg-[rgb(var(--primary-rgb))] text-white px-2 py-1 rounded-md text-sm">
-          Bán chạy
-        </div>
-      )} */}
       <Image src={image} alt={title} className="w-full h-48 lg:h-80 object-cover" width={200} height={200} priority />
     </div>
     <div className="flex flex-col justify-between p-4">
@@ -83,11 +78,6 @@ const ProductCardSmall = (
   }: any) => (
   <Card className="bg-white h-full rounded-lg overflow-hidden flex flex-col">
     <div className="relative px-4 pt-4">
-      {/* {hot && (
-        <div className="absolute top-2 left-2 bg-[rgb(var(--primary-rgb))] text-white px-2 py-1 rounded-md text-sm">
-          Bán chạy
-        </div>
-      )} */}
       <Image src={image} alt={title} className="w-full h-44 lg:h-64 object-cover " width={200} height={200} priority />
     </div>
     <div className="p-4 flex flex-col flex-grow">
@@ -108,6 +98,27 @@ const ProductCardSmall = (
   </Card>
 );
 
+const ProductCardMobile = (
+  {
+    image,
+    title,
+    price,
+  }: any) => (
+  <Card className="bg-white h-full rounded-lg overflow-hidden flex flex-col">
+    <div className="relative px-4 pt-4">
+      <Image src={image} alt={title} className="w-full h-40 lg:h-64 object-cover " width={200} height={200} priority />
+    </div>
+    <div className="p-4 flex flex-col flex-grow">
+      <div className='flex-grow text-center'>
+        <h3 className="lg:text-[16px] font-semibold text-gray-900 line-clamp-2">{title}</h3>
+        <div className="flex items-center justify-center text-center mt-4">
+          <span className="lg:text-[20px] font-light text-black text-center">{HELPER.formatVND(price)}</span>
+        </div>
+      </div>
+    </div>
+  </Card>
+);
+
 const CategoryCard = ({ title, icon }: any) => (
   <div className="bg-white w-28 lg:w-60 flex-1 border border-gray-300 border-dashed rounded-lg p-4 flex flex-col items-center justify-center space-y-4">
     {icon}
@@ -119,5 +130,6 @@ export const GlobalComponent = {
   BlogCard,
   ProductCard,
   ProductCardSmall,
+  ProductCardMobile,
   CategoryCard
 }

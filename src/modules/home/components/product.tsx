@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Card, CardContent } from "@/components/ui/card"
 import {
     Carousel,
     CarouselContent,
@@ -16,11 +15,12 @@ import { ProductService } from '@/services/product'
 
 interface ProductSectionProps {
     type: string;
-  }
+}
 
 
-const ProductSection: React.FC<ProductSectionProps> = ({type}) => {
+const ProductSection: React.FC<ProductSectionProps> = ({ type }) => {
     const [products, setProducts] = useState([] as any);
+
     const init = async () => {
         const res = await ProductService.getAll();
         if (res && res.data.length > 0) {
@@ -28,9 +28,11 @@ const ProductSection: React.FC<ProductSectionProps> = ({type}) => {
             setProducts(frameProducts);
         }
     };
+
     useEffect(() => {
         init()
     }, []);
+
     return (
         <section className="container !px-0 py-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

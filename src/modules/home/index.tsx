@@ -3,84 +3,57 @@
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Image from "next/image";
-import CategoryListSection from "./components/category-list";
-import ProductSection from "./components/product";
-import CategorySpecialSection from "./components/category-special";
-import { Ban } from "lucide-react";
 import BannerSlider from "./components/slider";
+import ProductSectionMobile from "./components/product-mobile";
+import CategoryListSectionMobile from "./components/category-list-mobile";
 
 export default function HomeClient() {
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <div className="w-full bg-black p-2.5 text-center text-white text-sm font-semibold">
-        <span>IN ẢNH TRỰC TUYẾN - In ảnh nhanh chóng, tiện lợi</span>
+      <div className="flex flex-col justify-center items-center w-full bg-[#F0F0F0] py-1 text-center text-[#A98F57] text-sm font-semibold">
+        <span className="text-md font-light">Các phong cách</span>
+        <span className="text-lg font-semibold">THIẾT KẾ ALBUM CƯỚI HOT NHẤT</span>
       </div>
       <Header />
-      <div className="w-full flex flex-col justify-center items-center text-center py-6 gap-1">
-        <span className="text-md font-semibold">Thông tin thanh toán: </span>
-        <span className="text-sm font-light">
-          Vui lòng đảm bảo địa chỉ giao hàng và tên thành phố được định dạng
-          chính xác trước khi tiến hành thanh toán. Để biết thêm chi tiết, vui
-          lòng tham khảo{" "}
-          <span className="text-[rgb(var(--primary-rgb))]">Thêm chi tiết</span>{" "}
-          hoặc{" "}
-          <span className="text-[rgb(var(--primary-rgb))]">
-            Liên hệ với chúng tôi
-          </span>
-          .
-        </span>
+      <BannerSlider />
+      <div className="w-full flex flex-col justify-center items-start px-4 gap-4 pt-10">
+        <div className="w-full h-[2px] bg-orange-600"></div>
+        <span className="text-2xl font-semibold mt-6">IN ẢNH TRỰC TUYẾN</span>
+        <span className="text-md text-[#888888] font-light text-justify">Chúng tôi thấu hiểu rằng những khoảnh khắc quan trọng trong cuộc đời không chỉ là dấu ấn của thời gian, mà còn là những cột mốc ý nghĩa trong hành trình sống của mỗi người. Được đồng hành cùng những giây phút đặc biệt, từ niềm hạnh phúc tròn vẹn trong ngày cưới, niềm vui tuổi già gặp ngày tân xuân, sự ấm áp của bữa tiệc thôi nôi bên gia đình, về đẹp rực rỡ của thanh xuân thời thiếu nữ, đến những bức ảnh gia đình tràn đầy yêu thương, gắn kết qua từng thế hệ.</span>
+        <span className="text-md text-[#888888] font-light text-justify">Với niềm đam mê và chuyên môn trong thiết kế và gia công, chúng tôi tự hào mang đến những sản phẩm độc đáo, tinh tế, giúp bạn lưu giữ trọn vẹn những kỷ niệm quý giá. Đó là niềm vui, nơi nhớ, hay tình cảm gia đình sâu sắc, chúng tôi tin rằng mỗi khoảnh khắc đều xứng đáng được trân trọng và được hiện diện theo cách đặc biệt nhất.</span>
+        <div className="w-full h-[2px] bg-orange-600 mt-6"></div>
       </div>
-      <div className="container">
-        <BannerSlider />
-        <CategoryListSection />
-        <ProductSection type="Frame" />
-        <div className="relative w-full h-[600px]">
-          <Image
-            src="https://res.cloudinary.com/farmcode/image/upload/v1737355887/iatt/vw0razvbguqvcumvyfxa.png"
-            alt="alt"
-            fill
-            className="object-cover rounded-lg"
-          />
-        </div>
-        <ProductSection type="Album" />
-        <CategorySpecialSection />
-        <div className="relative w-full h-96 mt-8 rounded-lg">
-          <Image
-            src="https://res.cloudinary.com/farmcode/image/upload/v1739871597/iatt/gvvwloyp3qjmrcygbxsg.png"
-            alt="alt"
-            fill
-            className="object-cover rounded-lg"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/40 to-transparent rounded-lg">
-            <div className="absolute bottom-[30%] left-0 right-0 p-6 text-white">
-              <h3 className="text-2xl font-bold mb-2 text-black">
-                IN ẢNH TRỰC TUYẾN
-              </h3>
-              <p className="text-sm mb-2 text-black w-[50%]">
-                Biến khoảnh khắc yêu thích của bạn thành những bức ảnh đẹp lung
-                linh! Chỉ cần tải ảnh lên, chọn kích thước, chất liệu và đặt
-                hàng trong vài phút.
-              </p>
-            </div>
-          </div>
-        </div>
-        <ProductSection type="Plastic" />
-        <div className="relative w-full grid-cols-1 lg:grid-cols-2 gap-4 pb-8">
-          <Image
-            src="https://res.cloudinary.com/farmcode/image/upload/v1737356705/iatt/ryuyf5j3kg5d02hlm1lc.png"
-            alt="alt"
-            className="h-full mb-8 lg:mb-0 lg:h-[400px] object-cover rounded-lg"
-            width={1000}
-            height={0}
-          />
-          <Image
-            src="https://res.cloudinary.com/farmcode/image/upload/v1737355998/iatt/j8arjpmms7r5w2vlu78w.png"
-            alt="alt"
-            className="h-21 lg:h-[400px] object-cover rounded-lg"
-            width={1000}
-            height={0}
-          />
-        </div>
+      <div className="w-full flex flex-col justify-center items-center px-4 gap-4 mt-4">
+        <span className="text-2xl font-semibold mt-8 mb-4 text-center">SẢN PHẨM MỚI</span>
+        <ProductSectionMobile type="Frame" />
+        <div className="w-full h-[2px] bg-orange-600 mt-8"></div>
+      </div>
+      <div className="w-full flex flex-col justify-center items-center px-4 gap-4 mt-4">
+        <span className="text-2xl font-semibold mt-8 mb-4 text-center">SẢN PHẨM ĐƯỢC YÊU THÍCH</span>
+        <CategoryListSectionMobile />
+      </div>
+      <div className="relative w-full h-[600px] mb-10 mt-16">
+        <Image
+          src="https://res.cloudinary.com/farmcode/image/upload/v1740925245/iatt/tq0p7ekzpcmlkm3g6ccq.png"
+          alt="alt"
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="w-full flex flex-col justify-center items-center px-4 gap-4">
+      <div className="w-full h-[2px] bg-orange-600 mt-8"></div>
+        <span className="text-2xl font-semibold mt-8 mb-4 text-center">GIÁ TỐT NHẤT CHO PHOTOGRAPHER</span>
+        <span className="text-center">Chúng tôi luôn hướng đến sự chuyên nghiệp và Dịch vụ tốt nhất cho Photographer.
+          Bạn là Photographer/ studio hãy đăng ký thành viên để nhận nhiều ưu đãi về giá & dịch vụ. Click tại đây để đăng ký thành viên.
+          Chúng tôi sẽ xác nhận qua email trong vòng 24h nếu bạn là Photographer.</span>
+      </div>
+      <div className="relative w-full h-[600px] mt-16">
+        <Image
+          src="https://res.cloudinary.com/farmcode/image/upload/v1740925209/iatt/fhwyaaj9z4vxbtps6lqm.png"
+          alt="alt"
+          fill
+          className="object-cover"
+        />
       </div>
       <Footer />
     </div>
